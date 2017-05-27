@@ -5,7 +5,7 @@
 <div class="bottom-tab">
 	<ul class="tabs">
 		<li class="tab col s3"><a class="active" href="#test1"><i class="material-icons">dashboard</i></a></li>
-		<li class="tab col s3"><a href= "people" id="people"><i class="material-icons">search</i></a></li>
+		<li class="tab col s3"><a href="search"  id="search"><i class="material-icons">search</i></a></li>
 		<li class="tab col s3"><a href="routine"  id="routine"><i class="material-icons">timelapse</i></a></li>
 	</ul>
 </div>
@@ -75,8 +75,8 @@
 	{% block script %}
 	<script type="text/javascript"> 
 		$(function(){
-			$('#people').click(function(){
-				location.replace("/people"); 
+			$('#search').click(function(){
+				location.replace("/search"); 
 			});
 			$('#routine').click(function(){
 				location.replace("/routine"); 

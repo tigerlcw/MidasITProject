@@ -49,6 +49,7 @@ def today(request):
     context = {
         'meals': meals
     }
+
     return render(request, 'main/index.html', context)
 
 def routine_detail(request, pk):
