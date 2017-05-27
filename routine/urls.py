@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from routine import settings
 
 urlpatterns = [
-    url(r'^', include('meal.urls')),
+    url(r'^', include('meal.urls', namespace='meal')),
     url(r'^account/', include('account.urls')),
     url(r'^people/', include('people.urls')),
     url(r'^admin/', include(admin.site.urls)),

@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^meal_detail/(?P<pk>.+)/$', views.routine_detail),
+    url(r'^meal_detail/(?P<pk>.+)/$', views.routine_detail, name='detail'),
     url(r'^comment_add/(?P<pk>.+)/$', views.comment_add),
     url(r'^meal_check/(?P<pk>.+)/$', views.meal_check),
     url(r'^meal_check_not/(?P<pk>.+)/$', views.meal_check_not),
