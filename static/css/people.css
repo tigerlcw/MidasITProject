@@ -3,17 +3,17 @@
 	padding: 0;
 	box-shadow: none;
 	background-color: #fff;
-	border:  solid 1px #2b90d9;
+	border:  solid 1px #D66D75;
 	border-radius: none;
-	color: #2b90d9;
+	color: #D66D75;
 	border-radius: 50%;
 }
 .add-friend:active{
 	width: 36px;
 	padding: 0;
 	box-shadow: none;
-	background-color: #2b90d9;
-	border:  solid 1px #2b90d9;
+	background-color: #D66D75;
+	border:  solid 1px #D66D75;
 	border-radius: none;
 	color: #fff;
 	border-radius: 50%;
@@ -22,8 +22,8 @@
 	width: 36px;
 	padding: 0;
 	box-shadow: none;
-	background-color: #2b90d9;
-	border:  solid 1px #2b90d9;
+	background-color: #D66D75;
+	border:  solid 1px #D66D75;
 	border-radius: none;
 	color: #fff;
 	border-radius: 50%;
@@ -61,9 +61,12 @@
     height: 40px;
     line-height: 40px;
     padding: 0;
-    background-color: #039be5;
+    background-color: #D66D75;
     border-radius: 50%;
     transition: .3s;
     cursor: pointer;
     vertical-align: middle;
+}
+.btn:hover, .btn-large:hover {
+    background-color: #D66D75 !important;
 }

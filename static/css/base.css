@@ -2,7 +2,10 @@ body{
   background-color: #d9e1e8
 }
 nav {
-  background-color: #282c37;
+  background: #D66D75;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E29587, #D66D75);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E29587, #D66D75); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   position: fixed;
   z-index: 2;
 }
@@ -41,7 +44,7 @@ nav {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #2b90d9;
+    background-color: #D66D75;
     will-change: left, right;
 }
 .tabs .tab a:hover, .tabs .tab a {
@@ -50,7 +53,7 @@ nav {
 }
 .tabs .tab a:hover, .tabs .tab a.active {
     background-color: transparent;
-    color: #2b90d9;
+    color: #D66D75;
 }
 .sub-tab{
   position: fixed !important;
@@ -83,13 +86,16 @@ nav {
    text-align: center;
 }
 .card-routine-title{
-  color: #2b90d9;
+  color: #D66D75;
   font-size: 24px;
   font-weight: 800;
 }
 .timer-icon{
-  color: #2b90d9;
+  color: #D66D75;
 }
 .timer{
 font-size: 16px !important;
+}
+.btn:hover, .btn-large:hover {
+    background-color: #D66D75 !important;
 }

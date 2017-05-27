@@ -4,16 +4,16 @@
 .save-btn{
 	background-color: #fff;
 	border-radius: 36px;
-	border: solid 1px #2b90d9;
+	border: solid 1px #D66D75;
 	box-shadow: none;
-	color: #2b90d9;
+	color: #D66D75;
 }
 .like-btn{
 	background-color: #fff;
 	border-radius: 36px;
-	border: solid 1px #2b90d9;
+	border: solid 1px #D66D75;
 	box-shadow: none;
-	color: #2b90d9;
+	color: #D66D75;
 }
 .time{
 	font-size: 40px;
@@ -39,7 +39,7 @@
 	width: 100%;
 	box-shadow: 0px 0px 5px #bbb;
 	z-index: 3;
-	background-color:#2b90d9; 
+	background-color:#D66D75; 
 	color: #fff;
 	height: 54px;
 	font-size: 28px;
@@ -52,5 +52,5 @@
 }
 .write-btn{
 	width: 100%;
-	background-color: red !important;
+	background-color: #D66D75 !important;
 }

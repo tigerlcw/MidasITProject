@@ -1,5 +1,8 @@
 body{
-  background-color: #282c37;
+  background: #D66D75;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E29587, #D66D75);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E29587, #D66D75); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .logo{
   margin-top: 60px;
@@ -9,12 +12,37 @@ body{
 }
 .login-btn{
   width: 80%;
-  background-color: #2b90d9;
+  background-color: #fff;
   margin-top: 60px;
   margin-left: 10%;
   border-radius: 50px;
   height: 54px;
   font-size: 24px;
   font-weight: 300;
+  color: #E29587 !important;
 }
 
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
+.input-field label {
+    color: #fff;
+    position: absolute;
+    top: 0.8rem;
+    left: 0;
+    font-size: 1rem;
+    cursor: text;
+    transition: .2s ease-out;
+}
