@@ -16,9 +16,9 @@
 	<div id="search" class="col s12">	
 		<nav>
 			<div class="nav-wrapper">
-				<form>
+				<form action="/search" method="GET">
 					<div class="input-field">
-						<input id="search" type="search" required>
+						<input id="search" name="search" type="search" required>
 						<label class="label-icon" for="search"><i class="material-icons">search</i></label>
 						<i class="material-icons">close</i>
 					</div>
@@ -33,29 +33,83 @@
 		<div id="all" class="col s12 no-padding">
 			<div class="card">
 				<ul class="collection">
-					{% for user in users %}
-					<li class="collection-item">
+{% for meal in meal_date %}
+				<div class="card" onclick="location.href='/meal_detail/{{meal.pk}}'">
+					<div class="card-content card-user">
 						<div class="row valign-wrapper no-margin">
-							<div class="col s2">
-								<img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+							<div class="col s5"  style="margin-left:10px;">
+								<p>
+									<span class="card-username black-text">
+										{{meal.date}}
+									</span>
+								</p>
 							</div>
-							<div class="col s8 people-list">
-								<span class="black-text">
-									{{ user.name }}
-								</span>
-								<br />
-								<span class="people-sex-man">
-									♂
-								</span>
-								<span class="people-name">
-									20세
-								</span>
-							</div>
-							<div class="col s2">
-								<a class="btn add-friend">+</a>
+							<div class="col s4 text-right">
+								<span class="grey-text darken-3">{{meal.time}}</span>
 							</div>
 						</div>
-					</li>
+					</div>
+					<div class="card-action card-routine">
+						<img src="/media/{{ meal.image }}" width="100%" >
+						<br />
+						<span>{{meal.menu}}</span>
+					</div>
+					<div class="card-action">
+						<div class="row no-margin">
+							<div class="col s1">
+								<a><i class="material-icons timer-icon">local_dining</i></a>
+							</div>
+							<div class="col s3">
+								<span class="timer">{{meal.kcal}}kcal</span>
+							</div>
+							<div class="col s1">
+								<a><i class="material-icons timer-icon">favorite</i></a>
+							</div>
+							<div class="col s3">
+								<span class="timer">{{meal.favor}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+					{% endfor %}
+					{% for meal in meal_menu %}
+				<div class="card" onclick="location.href='/meal_detail/{{meal.pk}}'">
+					<div class="card-content card-user">
+						<div class="row valign-wrapper no-margin">
+							<div class="col s5"  style="margin-left:10px;">
+								<p>
+									<span class="card-username black-text">
+										{{meal.date}}
+									</span>
+								</p>
+							</div>
+							<div class="col s4 text-right">
+								<span class="grey-text darken-3">{{meal.time}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="card-action card-routine">
+						<img src="/media/{{ meal.image }}" width="100%" >
+						<br />
+						<span>{{meal.menu}}</span>
+					</div>
+					<div class="card-action">
+						<div class="row no-margin">
+							<div class="col s1">
+								<a><i class="material-icons timer-icon">local_dining</i></a>
+							</div>
+							<div class="col s3">
+								<span class="timer">{{meal.kcal}}kcal</span>
+							</div>
+							<div class="col s1">
+								<a><i class="material-icons timer-icon">favorite</i></a>
+							</div>
+							<div class="col s3">
+								<span class="timer">{{meal.favor}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
 					{% endfor %}
 				</ul>
 			</div>

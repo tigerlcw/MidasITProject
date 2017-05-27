@@ -25,7 +25,7 @@
 	</nav>
 	<div class="sub-tab">
 		<ul class="tabs">
-			<li class="tab col s6"><a  href="#all" class="active">2017.05.23</a></li>
+			<li class="tab col s6"><a  href="#all" class="active">{{meal.date}}&nbsp&nbsp<span class="grey-text">{{meal.time}}</span></a></li>
 		</ul>
 	</div>
 	<div class="fixed-action-btn">
@@ -35,45 +35,65 @@
 	</div>
 	<div id="modal1" class="modal">
 		<div class="modal-content">
-			<input type="text" name=""/ placeholder="댓글을 입력해 주세요">
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-		</div>
+			<form action="/comment_add/{{ meal.pk }}/" method="POST">{% csrf_token %}
+				<input type="text" name="comment" / placeholder="댓글을 입력해 주세요" >
+
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn write-btn" width=100%>
+					댓글 쓰기
+				</button>
+			</div>
+		</form>
 	</div>
 
-	<div id="all" class="col s12 white">
+
+	<div id="all" class="col s12 ">
 		<div class="contain container">
 			<div id="all" class="col s12 white">
 				<div class="card">
 					<div class="card-image">
-						<img src="http://i.huffpost.com/gen/4461698/thumbs/o-FACEBOOK-570.jpg?"></div>
+						<img src="/media/{{ meal.image }}" width="100%" >
 						
 						<div class="card-action">
-							<a href="#">밥, 미역국, 감자 조림, 메추리알, 삼겹살</a>
+							<a href="#">{{meal.menu}}</a>
 						</div>
+					</div>
 					</div>
 
 					<div class="divider"></div>
 					<div class="row buttons">
 						<div class="col s6">
-							<button class=	"btn col s12 save-btn">ATE</button>
+							{% if not mealcheck %}
+							<a href="/meal_check/{{ meal.pk }}" class="btn col s12 save-btn
+							">ATE</a>
+							{% else %}
+							<a href="/meal_check_not/{{ meal.pk }}" class="btn col s12 save-btn blue white-text
+							">ATE</a>
+							{% endif %}
+
 						</div>
 						<div class="col s6">
-							<button class= "btn col s12 like-btn">LIKE</button>
+							{% if not meallike %}
+							<a href="/meal_like/{{ meal.pk }}" class="btn col s12 save-btn
+							">LIKE</a>
+							{% else %}
+							<a href="/meal_like_not/{{ meal.pk }}" class="btn col s12 save-btn blue white-text
+							">LIKE</a>
+							{% endif %}
 						</div>
 					</div>
 					<div class="row">
 						<ul class="collection list-box">
-							{% for exercise in exercises%}
+							{% for comment in comments%}
 							<li class="collection-item list">
 								<div class="row no-margin">
 									<div class="col no-padding profile" style="width:44px;background-color:red;height:44px;text-align:center;font-size:28px;padding-top:12px !important;color:white;">
 										김
 									</div>
 									<div class="col">
-										<span class="list-name">김주용</span><br>
-										<span class="grey-text">냠냠 개꿀맛 인정? 어 인정</span>
+										<span class="list-name">{{ comment.user.name }}</span><br>
+										<span class="grey-text">{{ comment.comment }}</span>
 									</div>
 								</div>
 							</li>

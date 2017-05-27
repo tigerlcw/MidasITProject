@@ -8,7 +8,8 @@ class Meal(models.Model):
     time = models.CharField(max_length=10)
     menu = models.CharField(max_length=100)
     image = models.ImageField(upload_to='meal', default='default.jpg')
-
+    kcal = models.IntegerField(default=100)
+    favor = models.IntegerField(default=0)
     def __str__(self):
 
         return self.date + '-' + self.time
@@ -17,7 +18,7 @@ class Meal(models.Model):
 class MealCheck(models.Model):
     user = models.ForeignKey(User, null=True)
     meal = models.ForeignKey(Meal, null=True)
-
+    meal_date = models.CharField(max_length=100, default="2017-01-01")
     def __str__(self):
 
         return '{0}, {1}'.format(self.meal, self.user)

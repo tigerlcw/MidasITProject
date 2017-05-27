@@ -50,3 +50,7 @@
 	width: 44px;
 	background-color: red;
 }
+.write-btn{
+	width: 100%;
+	background-color: red !important;
+}

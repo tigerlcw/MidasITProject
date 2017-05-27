@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'myroutine',
     'people',
     'account',
-    'meal.apps.MealConfig',
+    'meal',
 )
 
 MIDDLEWARE_CLASSES = (

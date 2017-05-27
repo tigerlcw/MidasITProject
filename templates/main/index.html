@@ -22,26 +22,26 @@
 	<div class="contain container">
 		<div class="row">
 			<div class="col s12 m6 no-padding">
-				{% for routine in routines %}
-				<div class="card">
+			{% for meal in meals %}
+				<div class="card" onclick="location.href='/meal_detail/{{meal.pk}}'">
 					<div class="card-content card-user">
 						<div class="row valign-wrapper no-margin">
-							<div class="col s5">
+							<div class="col s5"  style="margin-left:10px;">
 								<p>
 									<span class="card-username black-text">
-										{{ routine.write_time|date:"M d" }}
+										{{meal.date}}
 									</span>
 								</p>
 							</div>
 							<div class="col s4 text-right">
-								<span class="grey-text darken-3">점심</span>
+								<span class="grey-text darken-3">{{meal.time}}</span>
 							</div>
 						</div>
 					</div>
 					<div class="card-action card-routine">
-						<img src="http://i.huffpost.com/gen/4461698/thumbs/o-FACEBOOK-570.jpg?7" width="100%" >
+						<img src="media/{{ meal.image }}" width="100%" >
 						<br />
-						<span>간장, 두부, 잡곡밥, 김치, 미역국</span>
+						<span>{{meal.menu}}</span>
 					</div>
 					<div class="card-action">
 						<div class="row no-margin">
@@ -49,13 +49,13 @@
 								<a><i class="material-icons timer-icon">local_dining</i></a>
 							</div>
 							<div class="col s3">
-								<span class="timer">130kcal</span>
+								<span class="timer">{{meal.kcal}}kcal</span>
 							</div>
 							<div class="col s1">
 								<a><i class="material-icons timer-icon">favorite</i></a>
 							</div>
 							<div class="col s3">
-								<span class="timer">10</span>
+								<span class="timer">{{meal.favor}}</span>
 							</div>
 						</div>
 					</div>
