@@ -24,8 +24,8 @@
 			<div class="col s12 m6 no-padding">
 			{% if meals %}
 			{% for meal in meals %}
-				<div class="card" onclick="location.href='/meal_detail/{{meal.pk}}'">
-					<div class="card-content card-user">
+				<div class="card">
+					<div class="card-content card-user" onclick="location.href='/meal_detail/{{meal.pk}}'">
 						<div class="row valign-wrapper no-margin">
 							<div class="col s5"  style="margin-left:10px;">
 								<p>
@@ -39,7 +39,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="card-action card-routine">
+					<div class="card-action card-routine" onclick="location.href='/meal_detail/{{meal.pk}}'">
 						<img src="/media/{{ meal.image }}" width="100%" >
 						<br />
 						<span>{{meal.menu}}</span>
@@ -57,6 +57,11 @@
 							</div>
 							<div class="col s3">
 								<span class="timer">{{meal.favor}}</span>
+							</div>
+							<div class="col s2">
+							</div>
+							<div class="col s2">
+								<a><i class="material-icons timer-icon">share</i></a>
 							</div>
 						</div>
 					</div>
