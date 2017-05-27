@@ -23,7 +23,7 @@ class Meal(models.Model):
 
     def get_full_url(self):
 
-        return 'http://127.0.0.1:8000' + self.get_absolute_url()
+        return 'http://kafuuchino.moe:8888' + self.get_absolute_url()
 
     def get_facebook_url(self):
 

@@ -53,17 +53,20 @@ def today(request):
     return render(request, 'main/index.html', context)
 
 def routine_detail(request, pk):
-    meal = Meal.objects.get(pk=pk)
-    comments = Comment.objects.filter(meal=meal)
-    mealcheck = MealCheck.objects.filter(user=request.user, meal=meal)
-    meallike = MealLike.objects.filter(user=request.user, meal=meal)
-    context = {
-        'meal': meal,
-        'comments':comments,
-        'mealcheck':mealcheck,
-        'meallike':meallike
-    }
-    return render(request, 'main/routine_detail.html', context)
+    try:
+        meal = Meal.objects.get(pk=pk)
+        comments = Comment.objects.filter(meal=meal)
+        mealcheck = MealCheck.objects.filter(user=request.user, meal=meal)
+        meallike = MealLike.objects.filter(user=request.user, meal=meal)
+        context = {
+            'meal': meal,
+            'comments':comments,
+            'mealcheck':mealcheck,
+            'meallike':meallike
+        }
+        return render(request, 'main/routine_detail.html', context)
+    except:
+        return HttpResponseRedirect('/')
 
 def exercise_timer(request):
     return render(request, 'main/exercise_timer.html')
@@ -171,18 +174,14 @@ class ExcelUploadFormView(FormView):
             records = pyexcel.iget_records(file_name=file_path)
 
             for record in records:
-                data = Meal(
+                data = Meal.objects.create(
                     date=record['date'],
                     time=record['time'],
                     menu=record['menu'],
                     kcal= record['kcal']
                 )
 
-                data.save()
-
-            os.remove(file_path)
-
-        return render(self.request, )
+        return super().form_valid(form)
 
 
 def group(request):
