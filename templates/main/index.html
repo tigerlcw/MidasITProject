@@ -7,6 +7,7 @@
 		<li class="tab col s3"><a class="active" href="#test1"><i class="material-icons">dashboard</i></a></li>
 		<li class="tab col s3"><a href= "people" id="people"><i class="material-icons">search</i></a></li>
 		<li class="tab col s3"><a href="routine"  id="routine"><i class="material-icons">timelapse</i></a></li>
+		<li class="tab col s3"><a href="group"  id="group"><i class="material-icons">group</i></a></li>
 	</ul>
 </div>
 <div class="sub-tab">
@@ -63,6 +64,7 @@
 							<div class="col s2">
 								<a href="{{ meal.get_twitter_url }}" target="_blank">
                                     <i class="material-icons timer-icon">share</i>
+
                                 </a>
 							</div>
 						</div>
@@ -90,6 +92,9 @@
 			});
 			$('#mypage').click(function(){
 				location.replace("/mypage"); 
+			});
+			$('#group').click(function(){
+				location.replace("/group"); 
 			});
 		});
 	</script>

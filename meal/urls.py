@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^routine/$', views.chart),
     url(r'^excel/$',views.ExcelUploadFormView.as_view()),
     url(r'^today/$', views.today),
+    url(r'^group/$', views.group),
 ]

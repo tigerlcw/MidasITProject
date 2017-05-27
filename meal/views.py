@@ -142,6 +142,9 @@ def search(request):
     }
     return render(request, 'main/people.html', context)
 
+def group(request):
+    return render(request, 'main/group.html')
+
 def random_string():
     return ''.join(random.choice(string.ascii_lowercase) for _ in range(10))
 
