@@ -72,6 +72,7 @@ def chart(request):
     meal_check=MealCheck.objects.values('meal_date').annotate(count=Count('meal_date'))
     meal_rank = Meal.objects.order_by('-favor')
     meal_myrank = MealCheck.objects.filter(user=request.user)
+    meal_count= MealCheck.objects.filter(user=request.user).count()
     print (meal_check)
 
     try:
@@ -89,6 +90,7 @@ def chart(request):
     'meal_rank_2':'데이터가 부족합니다.',
     'meal_rank_3':'데이터가 부족합니다.',
     'meal_myrank':'데이터가 부족합니다.',
+    'meal_count':meal_count,
     }
     return render(request, 'main/myroutine.html', context)
 
@@ -177,7 +179,7 @@ class ExcelUploadFormView(FormView):
 
             os.remove(file_path)
 
-        return super().form_valid(form)
+        return render(self.request, )
 
 
 def group(request):
@@ -206,3 +208,4 @@ def group_create(request):
                         limit=request.GET['limit']
                         )
     return HttpResponseRedirect(reverse('meal:group'))
+
