@@ -10,6 +10,7 @@ class Meal(models.Model):
     image = models.ImageField(upload_to='meal', default='default.jpg')
     kcal = models.IntegerField(default=100)
     favor = models.IntegerField(default=0)
+    check = models.BooleanField(default=False)
     def __str__(self):
 
         return self.date + '-' + self.time
@@ -51,3 +52,12 @@ class HonbabGroup(models.Model):
     def __str__(self):
 
         return self.title
+
+
+class Food(models.Model):
+    name = models.CharField(max_length=20)
+    count = models.IntegerField(default=0)
+
+    def __str__(self):
+
+        return self.name

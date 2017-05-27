@@ -19,8 +19,6 @@ from routine import settings
 
 urlpatterns = [
     url(r'^', include('meal.urls')),
-    url(r'^account/', include('account.urls')),
-    url(r'^people/', include('people.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
