@@ -22,6 +22,7 @@
 	<div class="contain container">
 		<div class="row">
 			<div class="col s12 m6 no-padding">
+			{% if meals %}
 			{% for meal in meals %}
 				<div class="card" onclick="location.href='/meal_detail/{{meal.pk}}'">
 					<div class="card-content card-user">
@@ -61,6 +62,9 @@
 					</div>
 				</div>
 				{% endfor %}
+				{% else %}
+				식단 데이터가 없습니다.
+				{% endif  %}
 			</div>
 		</div>
 	</div>

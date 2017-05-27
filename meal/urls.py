@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^timer/$', views.exercise_timer),
     url(r'^search/$', views.search),
     url(r'^routine/$', views.chart),
+    url(r'^excel/$',views.ExcelUploadFormView.as_view()),
+    url(r'^today/$', views.today),
 ]

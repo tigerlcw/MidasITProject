@@ -7,7 +7,7 @@ import os
 import random
 import string
 import json
-
+import datetime, time
 import pyexcel
 from django.conf import settings
 from django.views.generic.edit import FormView
@@ -17,6 +17,16 @@ from .models import Meal
 
 def index(request):
     meals = Meal.objects.all()
+    context = {
+        'meals': meals
+    }
+    return render(request, 'main/index.html', context)
+
+def today(request):
+    d=datetime.date.today()
+    today = str(d.year)+'-'+str(d.month)+'-'+str(d.day)
+    print(today)
+    meals = Meal.objects.filter(date=today)
     context = {
         'meals': meals
     }
@@ -108,14 +118,13 @@ def random_string():
 
 class ExcelUploadFormView(FormView):
     form_class = ExcelUploadForm
-    template_name = 'excel/upload.html'
+    template_name = 'main/excel.html'
     success_url = './'
 
     def form_valid(self, form):
         file = self.request.FILES['file']
         extension = file.name.split('.')[-1]
         pyexcel_list = ['xls', 'xlsx', 'csv']
-
         if extension in pyexcel_list:
             file_name = '{0}.{1}'.format(random_string(), extension)
             file_path = os.path.join(os.path.join(settings.BASE_DIR, 'swp'), file_name)
@@ -131,7 +140,8 @@ class ExcelUploadFormView(FormView):
                 data = Meal(
                     date=record['date'],
                     time=record['time'],
-                    menu=record['menu']
+                    menu=record['menu'],
+                    kcal= record['kcal']
                 )
 
                 data.save()
