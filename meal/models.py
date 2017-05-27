@@ -40,3 +40,13 @@ class MealLike(models.Model):
     def __str__(self):
 
         return '{0}, {1}'.format(self.meal, self.user)
+
+
+class HonbabGroup(models.Model):
+    user = models.ForeignKey(User, null=True)
+    meal = models.ForeignKey(Meal, null=True)
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+
+        return self.title
