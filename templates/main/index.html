@@ -5,9 +5,8 @@
 <div class="bottom-tab">
 	<ul class="tabs">
 		<li class="tab col s3"><a class="active" href="#test1"><i class="material-icons">dashboard</i></a></li>
-		<li class="tab col s3"><a href= "people" id="people"><i class="material-icons">group</i></a></li>
-		<li class="tab col s3"><a href="routine"  id="routine"><i class="material-icons">directions_run</i></a></li>
-		<li class="tab col s3"><a href="mypage"  id="mypage"><i class="material-icons">timelapse</i></a></li>
+		<li class="tab col s3"><a href= "people" id="people"><i class="material-icons">search</i></a></li>
+		<li class="tab col s3"><a href="routine"  id="routine"><i class="material-icons">timelapse</i></a></li>
 	</ul>
 </div>
 <div class="sub-tab">
@@ -27,35 +26,30 @@
 				<div class="card">
 					<div class="card-content card-user">
 						<div class="row valign-wrapper no-margin">
-							<div class="col s3">
-								<img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle responsive-img card-user-img"> <!-- notice the "circle" class -->
-							</div>
 							<div class="col s5">
 								<p>
 									<span class="card-username black-text">
-										{{ routine.writer }}
+										{{ routine.write_time|date:"M d" }}
 									</span>
-									<br />
-									<span>초보 트레이너</span>
 								</p>
 							</div>
 							<div class="col s4 text-right">
-								<span class="grey-text darken-3">{{ routine.write_time|date:"M d" }}</span>
+								<span class="grey-text darken-3">점심</span>
 							</div>
 						</div>
 					</div>
 					<div class="card-action card-routine">
-						<span class="card-routine-title">{{ routine.routine_name }}</span>
+						<img src="http://i.huffpost.com/gen/4461698/thumbs/o-FACEBOOK-570.jpg?7" width="100%" >
 						<br />
-						<span>{{ routine.routine_detail }}</span>
+						<span>간장, 두부, 잡곡밥, 김치, 미역국</span>
 					</div>
 					<div class="card-action">
 						<div class="row no-margin">
 							<div class="col s1">
-								<a><i class="material-icons timer-icon">timer</i></a>
+								<a><i class="material-icons timer-icon">local_dining</i></a>
 							</div>
 							<div class="col s3">
-								<span class="timer">{{ routine.routine_time}}</span>
+								<span class="timer">130kcal</span>
 							</div>
 							<div class="col s1">
 								<a><i class="material-icons timer-icon">favorite</i></a>
