@@ -18,4 +18,3 @@ urlpatterns = [
     url(r'^group/create/$', views.group_create, name='group_create'),
     url(r'^group/(?P<pk>.+)/$', views.group_join, name='group_join')
     ]
-    

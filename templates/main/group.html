@@ -25,8 +25,8 @@
 <body>
 
   <div class="fixed-action-btn">
-    <a class="btn-floating btn-large floting-buttion" >
-      <i class="large material-icons">add</i>
+    <a class="btn-floating btn-large floting-buttion" href="#modal1" >
+      <i class="large material-icons" >add</i>
     </a>
   </div>
   <nav>
@@ -47,59 +47,54 @@
 
   <div class="row">
     <div class="col s12 m6 card-view">
+      {% if not group_list %}
+      {% else %}
+      {% for group in group_list %}
       <div class="card">
         <div class="card-image">
-          <img src="/media/meal/gggsdf.jpg">
-          <a class="btn-floating btn-large halfway-fab waves-effect waves-light red">3/4</a>
+          <img src="/media/{{group.meal.image}}">
+          <a class="btn-floating btn-large halfway-fab waves-effect waves-light red">{{group.limit}}석 남음</a>
         </div>
         <div class="card-content">
-          <span class="card-date">2017-4-12 점심</span>
-          <span class="card-title">밥먹을사람</span>
-          <p>김치, 감자, 볶음밥, 감자칩, 라면, 삼겹살</p>
+          <span class="card-date">{{group.meal}}</span>
+          <span class="card-title">{{group.title}}</span>
+          <p>{{group.meal.menu}}</p>
         </div>
       </div>
-      <div class="card">
-        <div class="card-image">
-          <img src="/media/meal/gggsdf.jpg">
-          <a class="btn-floating btn-large halfway-fab waves-effect waves-light red">3/4</a>
-        </div>
-        <div class="card-content">
-          <span class="card-date">2017-4-12 점심</span>
-          <span class="card-title">밥먹을사람</span>
-          <p>김치, 감자, 볶음밥, 감자칩, 라면, 삼겹살</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <img src="/media/meal/gggsdf.jpg">
-          <a class="btn-floating btn-large halfway-fab waves-effect waves-light red">3/4</a>
-        </div>
-        <div class="card-content">
-          <span class="card-date">2017-4-12 점심</span>
-          <span class="card-title">밥먹을사람</span>
-          <p>김치, 감자, 볶음밥, 감자칩, 라면, 삼겹살</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-image">
-          <img src="/media/meal/gggsdf.jpg">
-          <a class="btn-floating btn-large halfway-fab waves-effect waves-light red">3/4</a>
-        </div>
-        <div class="card-content">
-          <span class="card-date">2017-4-12 점심</span>
-          <span class="card-title">밥먹을사람</span>
-          <p>김치, 감자, 볶음밥, 감자칩, 라면, 삼겹살</p>
-        </div>
-      </div>
-
+      {% endfor %}
+      {% endif %}
     </div>
   </div>
 
+  <form action="/group/create/" method="GET">{% csrf_token %}
+  <div id="modal1" class="modal bottom-sheet">
+        <div class="modal-content">
+     <label>Browser Select</label>
+     <select class="browser-default" name="meal">
+      {% for meal in meals %}
+      <option value="{{meal.pk}}" >{{meal}}</option>
+      {% endfor %}
+      <input type="text" name="title" placeholder="모임제목">
+      <input type="text" name="limit" placeholder="모임 인원 제한">
+    </select>
+  </div>
 
+ 
 
-  <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <div class="modal-footer">
+  <button type="submit" class="btn red" width = "100%">
+   모임 생성하기
+  </button>
+  </div>
+</div>
+ </form>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script type="text/javascript">  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });</script>
   {% block script %}
   {% endblock %}
 </body>

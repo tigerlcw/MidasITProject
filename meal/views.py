@@ -142,9 +142,6 @@ def search(request):
     }
     return render(request, 'main/people.html', context)
 
-def group(request):
-    return render(request, 'main/group.html')
-
 def random_string():
     return ''.join(random.choice(string.ascii_lowercase) for _ in range(10))
 
@@ -186,14 +183,26 @@ class ExcelUploadFormView(FormView):
 def group(request):
     group_list = HonbabGroup.objects.all()
     template = ''
-
+    meals = Meal.objects.all()
     context = {
-        'group_list': group_list
+        'group_list': group_list,
+        'meals' : meals
     }
 
-    return render(request, template, group_list)
+
+    return render(request, 'main/group.html', context)
 
 
 def group_join(request, pk):
+    group = HonbabGroup.objects.get(pk=pk)
+    return HttpResponseRedirect(reverse('meal:group'))
 
+def group_create(request):
+    pk=request.GET['meal']
+    meal= Meal.objects.get(pk=pk)
+    Group =HonbabGroup.objects.create(
+                        user=request.user, meal=meal,
+                        title=request.GET['title'],
+                        limit=request.GET['limit']
+                        )
     return HttpResponseRedirect(reverse('meal:group'))

@@ -63,7 +63,7 @@ class MealLike(models.Model):
 
 
 class HonbabGroup(models.Model):
-    user = models.ManyToManyField(User, null=True)
+    user = models.ForeignKey(User, null=True)
     meal = models.ForeignKey(Meal, null=True)
     title = models.CharField(max_length=100)
     limit = models.IntegerField(default=1)
@@ -71,7 +71,13 @@ class HonbabGroup(models.Model):
     def __str__(self):
 
         return self.title
+class GroupJoin(models.Model):
+    group = models.ForeignKey(HonbabGroup, null=True)
+    user = models.ForeignKey(User, null=True)
 
+    def __str__(self):
+
+        return self.group
 
 class Food(models.Model):
     name = models.CharField(max_length=20)
