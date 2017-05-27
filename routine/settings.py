@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'people',
     'account',
     'meal',
+    'django_social_share'
 )
 
 MIDDLEWARE_CLASSES = (
