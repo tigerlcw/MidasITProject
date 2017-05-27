@@ -1,6 +1,7 @@
 import os
 import random
 import string
+import json
 
 import pyexcel
 
@@ -11,6 +12,10 @@ from .forms import ExcelUploadForm
 from .models import Meal
 
 
+def random_string():
+    return ''.join(random.choice(string.ascii_lowercase) for _ in range(10))
+
+
 class ExcelUploadFormView(FormView):
     form_class = ExcelUploadForm
     template_name = 'excel/upload.html'
@@ -18,25 +23,29 @@ class ExcelUploadFormView(FormView):
 
     def form_valid(self, form):
         file = self.request.FILES['file']
-        file_name = '{0}.xlsx'.format(''.join(random.choice(string.ascii_lowercase) for _ in range(10)))
-        file_path = os.path.join(os.path.join(settings.BASE_DIR, 'swp'), file_name)
+        extension = file.name.split('.')[-1]
+        pyexcel_list = ['xls', 'xlsx', 'csv']
 
-        with open(file_path, 'wb') as f:
+        if extension in pyexcel_list:
+            file_name = '{0}.{1}'.format(random_string(), extension)
+            file_path = os.path.join(os.path.join(settings.BASE_DIR, 'swp'), file_name)
 
-            for chunk in file.chunks():
-                f.write(chunk)
+            with open(file_path, 'wb') as f:
 
-        records = pyexcel.iget_records(file_name=file_path)
+                for chunk in file.chunks():
+                    f.write(chunk)
 
-        for record in records:
-            data = Meal(
-                date=record['date'],
-                time=record['time'],
-                menu=record['menu']
-            )
+            records = pyexcel.iget_records(file_name=file_path)
 
-            data.save()
+            for record in records:
+                data = Meal(
+                    date=record['date'],
+                    time=record['time'],
+                    menu=record['menu']
+                )
 
-        os.remove(file_path)
+                data.save()
+
+            os.remove(file_path)
 
         return super().form_valid(form)
