@@ -4,6 +4,8 @@
 <link rel ="stylesheet" href="{% static 'css/people.css' %}" />
 {% endblock %}
 {% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <div class="bottom-tab">
 	<ul class="tabs">
 		<li class="tab col s3"><a  href="/" id="feed"><i class="material-icons">dashboard</i></a></li>
@@ -20,41 +22,41 @@
 </div>
 
 <div class="contain container">
-	<div class="fixed-action-btn">
-		<a class="btn-floating btn-large ">
-			<i class="large material-icons">mode_edit</i>
-			</a>
-	</div>
+
 	<div class="row">
+		<div class="col s12 no-padding">
+			<ul class="collection with-header">
+				<li class="collection-header"><h4>이번달 인기 식단</h4></li>
+				<li class="collection-item"><span style="color:blue">1st</span>  2017-06-05 점심</li>
+				<li class="collection-item"><span style="color:blue">2nd</span> 2017-06-05 점심</li>
+				<li class="collection-item"><span style="color:blue">3th</span> 2017-06-05 점심</li>
+			</ul>	
+		</div>
 		<div id="all" class="col s12 no-padding">
-		{% for routine in routines%}
+			{% for routine in routines%}
 			<div class="card">
-				<div class="card-action card-routine">
-					<span class="card-routine-title">{{ routine.routine_name }}</span>
-					<br />
-					<span>{{ routine.routine_detail }}</span>
-				</div>
 				<div class="card-action">
-					<div class="row no-margin">
-						<div class="col s1">
-							<a><i class="material-icons timer-icon">timer</i></a>
-						</div>
-						<div class="col s3">
-							<span class="timer">{{ routine.routine_time }}</span>
-						</div>
-						<div class="col s1">
-							<a><i class="material-icons timer-icon">favorite</i></a>
-						</div>
-						<div class="col s2">
-							<span class="timer">10</span>
-						</div>
-					</div>
+					<div id="chart_div"></div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-action">
+					<div id="chart_div2"></div>
 				</div>
 			</div>
 			{% endfor %}
 		</div>
 	</div>
-	<div id="search" class="col s12">Test 2</div>
+	<div id="search" class="col s12">
+		<div class="col s12 no-padding">
+			<ul class="collection with-header">
+				<li class="collection-header"><h4>내가 먹은 식단</h4></li>
+				<li class="collection-item"><span style="color:blue">1st</span>  2017-06-05 점심</li>
+				<li class="collection-item"><span style="color:blue">2nd</span> 2017-06-05 점심</li>
+				<li class="collection-item"><span style="color:blue">3th</span> 2017-06-05 점심</li>
+			</ul>	
+		</div>
+	 </div>
 </div>
 {% endblock %}
 
@@ -71,5 +73,91 @@
 			location.replace("/mypage"); 
 		});
 	});
+</script>
+<script type="text/javascript">
+	google.charts.load('current', {packages: ['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawBasic);
+
+	function drawBasic() {
+
+		var data = new google.visualization.DataTable();
+		data.addColumn('timeofday', 'Time of Day');
+		data.addColumn('number', 'Motivation Level');
+
+		data.addRows([
+			[{v: [8, 0, 0], f: '8 am'}, 1],
+			[{v: [9, 0, 0], f: '9 am'}, 2],
+			[{v: [10, 0, 0], f:'10 am'}, 3],
+			[{v: [11, 0, 0], f: '11 am'}, 4],
+			[{v: [12, 0, 0], f: '12 pm'}, 5],
+			[{v: [13, 0, 0], f: '1 pm'}, 6],
+			[{v: [14, 0, 0], f: '2 pm'}, 7],
+			[{v: [15, 0, 0], f: '3 pm'}, 8],
+			[{v: [16, 0, 0], f: '4 pm'}, 9],
+			[{v: [17, 0, 0], f: '5 pm'}, 10],
+			]);
+
+		var options = {
+			title: '요일별 식사량',
+			hAxis: {
+				title: 'Time of Day',
+				format: 'h:mm a',
+				viewWindow: {
+					min: [7, 30, 0],
+					max: [17, 30, 0]
+				}
+			},
+			vAxis: {
+			}
+		};
+
+		var chart = new google.visualization.ColumnChart(
+			document.getElementById('chart_div2'));
+
+		chart.draw(data, options);
+	}
+</script>
+<script type="text/javascript">
+	google.charts.load('current', {packages: ['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawBasic);
+
+	function drawBasic() {
+
+		var data = new google.visualization.DataTable();
+		data.addColumn('timeofday', 'Time of Day');
+		data.addColumn('number', 'Motivation Level');
+
+		data.addRows([
+			[{v: [8, 0, 0], f: '8 am'}, 1],
+			[{v: [9, 0, 0], f: '9 am'}, 2],
+			[{v: [10, 0, 0], f:'10 am'}, 3],
+			[{v: [11, 0, 0], f: '11 am'}, 4],
+			[{v: [12, 0, 0], f: '12 pm'}, 5],
+			[{v: [13, 0, 0], f: '1 pm'}, 6],
+			[{v: [14, 0, 0], f: '2 pm'}, 7],
+			[{v: [15, 0, 0], f: '3 pm'}, 8],
+			[{v: [16, 0, 0], f: '4 pm'}, 9],
+			[{v: [17, 0, 0], f: '5 pm'}, 10],
+			]);
+
+		var options = {
+			title: '월별 식사량',
+			hAxis: {
+				title: 'Time of Day',
+				format: 'h:mm a',
+				viewWindow: {
+					min: [7, 30, 0],
+					max: [17, 30, 0]
+				}
+			},
+			vAxis: {
+			}
+		};
+
+		var chart = new google.visualization.ColumnChart(
+			document.getElementById('chart_div'));
+
+		chart.draw(data, options);
+	}
 </script>
 {% endblock %}
