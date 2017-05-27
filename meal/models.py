@@ -63,7 +63,7 @@ class MealLike(models.Model):
 
 
 class HonbabGroup(models.Model):
-    user = models.ForeignKey(User, null=True)
+    user = models.ManyToManyField(User, null=True)
     meal = models.ForeignKey(Meal, null=True)
     title = models.CharField(max_length=100)
 
