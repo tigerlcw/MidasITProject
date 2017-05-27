@@ -66,6 +66,7 @@ class HonbabGroup(models.Model):
     user = models.ManyToManyField(User, null=True)
     meal = models.ForeignKey(Meal, null=True)
     title = models.CharField(max_length=100)
+    limit = models.IntegerField(default=1)
 
     def __str__(self):
 
