@@ -39,6 +39,7 @@ def index(request):
     context = {
         'meals': meals
     }
+
     return render(request, 'main/index.html', context)
 
 def today(request):
@@ -67,7 +68,7 @@ def routine_detail(request, pk):
 
 def exercise_timer(request):
     return render(request, 'main/exercise_timer.html')
-  
+
 def chart(request):
     meal_check=MealCheck.objects.values('meal_date').annotate(count=Count('meal_date'))
     meal_rank = Meal.objects.order_by('-favor')
@@ -82,7 +83,7 @@ def chart(request):
     'meal_myrank':meal_myrank,
     }
     return render(request, 'main/myroutine.html', context)
-  
+
 def comment_add(request, pk):
     meal = Meal.objects.get(pk=pk)
     comment = Comment.objects.create(
