@@ -4,8 +4,9 @@
 <link rel ="stylesheet" href="{% static 'css/people.css' %}" />
 {% endblock %}
 {% block content %}
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+      
 <div class="bottom-tab">
 	<ul class="tabs">
 		<li class="tab col s3"><a href="main" id="main"><i class="material-icons">dashboard</i></a></li>
@@ -36,13 +37,14 @@
 			</div>
 		</div>
 		<div class="col s12 no-padding">
-			<ul class="collection with-header">
+			<ul class="collection with-header  no-margin">
 				<li class="collection-item white-text center" style="background-color:#D66D75">이번달 인기식단</li>
 				<li class="collection-item"><span style="color:hotpink">1st</span>  &nbsp&nbsp&nbsp&nbsp{{meal_rank_1}}</li>
 				<li class="collection-item"><span style="color:hotpink">2nd</span> &nbsp&nbsp&nbsp&nbsp {{meal_rank_2}}</li>
 				<li class="collection-item"><span style="color:hotpink">3th</span>  &nbsp&nbsp&nbsp&nbsp{{meal_rank_3}}</li>
 			</ul>	
 		</div>
+		
 		<div id="all" class="col s12 no-padding">
 			{% for routine in routines%}
 			
@@ -53,7 +55,14 @@
 			</div>
 			{% endfor %}
 		</div>
+<div class="col s12 no-padding">
+		<div id="timechart" style="width: 100%; height: 300px;"></div>
 	</div>
+	</div>
+	
+	<div class="row">
+	
+	
 	{% endif %}
 	<div id="search" class="col s12">
 		<div class="row">
@@ -131,5 +140,33 @@
 		var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
 		chart.draw(data, options);
 	}
+</script>
+<script type="text/javascript">
+  
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawBasic);
+
+        function drawBasic() {
+
+            var data = google.visualization.arrayToDataTable([
+                 ['word', 'Population',],
+                {% for food in foods %}
+                ['{{ food.name }}',      {{ food.count }}],
+                {% endfor %}
+                ]);
+
+            var options = {
+                title: '가장 많이 사용된 단어',
+                chartArea: {width: '50%'},
+                hAxis: {
+                    title: 'Total Population',
+                    minValue: 0
+                },
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('timechart'));
+
+            chart.draw(data, options);
+        }
 </script>
 {% endblock %}

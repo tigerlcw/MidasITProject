@@ -73,6 +73,7 @@ def chart(request):
     meal_rank = Meal.objects.order_by('-favor')
     meal_myrank = MealCheck.objects.filter(user=request.user)
     meal_count= MealCheck.objects.filter(user=request.user).count()
+    foods = Food.objects.all()
     print (meal_check)
 
     try:
@@ -81,7 +82,7 @@ def chart(request):
     'meal_rank_1':meal_rank[0],
     'meal_rank_2':meal_rank[1],
     'meal_rank_3':meal_rank[2],
-    'meal_myrank':meal_myrank,
+    'meal_myrank':meal_myrank, 'foods':foods,
     }
     except:
         context = {
@@ -91,7 +92,9 @@ def chart(request):
     'meal_rank_3':'데이터가 부족합니다.',
     'meal_myrank':'데이터가 부족합니다.',
     'meal_count':meal_count,
+    'foods':foods,
     }
+
     return render(request, 'main/myroutine.html', context)
 
 def comment_add(request, pk):
