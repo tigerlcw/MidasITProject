@@ -1,18 +1,18 @@
-from django.shortcuts import render
-from .models import Meal, Comment, MealCheck,MealLike
-from account.models import User
-from django.http import HttpResponseRedirect, HttpResponse
-from django.db.models import Count
 import os
 import random
 import string
-import json
-import datetime, time
+import datetime
 import pyexcel
+
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.conf import settings
 from django.views.generic.edit import FormView
+
 from .forms import ExcelUploadForm
-from .models import Meal, Food
+from .models import Meal, Food, Comment, MealCheck, MealLike, HonbabGroup
 
 
 def index(request):
@@ -181,3 +181,19 @@ class ExcelUploadFormView(FormView):
             os.remove(file_path)
 
         return super().form_valid(form)
+
+
+def group(request):
+    group_list = HonbabGroup.objects.all()
+    template = ''
+
+    context = {
+        'group_list': group_list
+    }
+
+    return render(request, template, group_list)
+
+
+def group_join(request, pk):
+
+    return HttpResponseRedirect(reverse('meal:group'))
