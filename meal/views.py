@@ -12,14 +12,34 @@ import pyexcel
 from django.conf import settings
 from django.views.generic.edit import FormView
 from .forms import ExcelUploadForm
-from .models import Meal
+from .models import Meal, Food
 
 
 def index(request):
+    boolean_meals = Meal.objects.filter(check=False)
     meals = Meal.objects.all()
+
+    for meal in boolean_meals.iterator():
+
+        for menu in meal.menu.split(','):
+            menu = menu.strip()
+
+            try:
+                food = Food.objects.get(name=menu)
+
+            except:
+                food = Food(name=menu)
+
+            food.count += 1
+            food.save()
+
+        meal.check = True
+        meal.save()
+
     context = {
         'meals': meals
     }
+
     return render(request, 'main/index.html', context)
 
 def today(request):
@@ -47,7 +67,7 @@ def routine_detail(request, pk):
 
 def exercise_timer(request):
     return render(request, 'main/exercise_timer.html')
-  
+
 def chart(request):
     meal_check=MealCheck.objects.values('meal_date').annotate(count=Count('meal_date'))
     meal_rank = Meal.objects.order_by('-favor')
@@ -62,7 +82,7 @@ def chart(request):
     'meal_myrank':meal_myrank,
     }
     return render(request, 'main/myroutine.html', context)
-  
+
 def comment_add(request, pk):
     meal = Meal.objects.get(pk=pk)
     comment = Comment.objects.create(
