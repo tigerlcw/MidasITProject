@@ -184,11 +184,19 @@ class ExcelUploadFormView(FormView):
 
 def group(request):
     group_list = HonbabGroup.objects.all()
-    template = ''
+
+    group_user = HonbabGroup.objects.filter(user=request.user)
+
+    exist = False
+
+    if group_user:
+        exist = True
+
     meals = Meal.objects.all()
     context = {
         'group_list': group_list,
-        'meals' : meals
+        'meals' : meals,
+        'exist': exist
     }
 
 
@@ -196,7 +204,10 @@ def group(request):
 
 
 def group_join(request, pk):
-    group = HonbabGroup.objects.get(pk=pk)
+    a = HonbabGroup.objects.get(pk=pk)
+    a.user = request.user
+    a.save()
+
     return HttpResponseRedirect(reverse('meal:group'))
 
 def group_create(request):
