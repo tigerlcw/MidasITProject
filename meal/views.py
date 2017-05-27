@@ -74,12 +74,21 @@ def chart(request):
     meal_myrank = MealCheck.objects.filter(user=request.user)
     print (meal_check)
 
-    context = {
+    try:
+        context = {
     'meal_check':meal_check,
     'meal_rank_1':meal_rank[0],
     'meal_rank_2':meal_rank[1],
     'meal_rank_3':meal_rank[2],
     'meal_myrank':meal_myrank,
+    }
+    except:
+        context = {
+    'meal_check':meal_check,
+    'meal_rank_1':'데이터가 부족합니다.',
+    'meal_rank_2':'데이터가 부족합니다.',
+    'meal_rank_3':'데이터가 부족합니다.',
+    'meal_myrank':'데이터가 부족합니다.',
     }
     return render(request, 'main/myroutine.html', context)
 
