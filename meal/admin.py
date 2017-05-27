@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Meal, MealCheck, MealLike, Comment, Food
+from .models import Meal, MealCheck, MealLike, Comment, Food, HonbabGroup
 
 
 class MealAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ admin.site.register(MealCheck)
 admin.site.register(MealLike)
 admin.site.register(Comment)
 admin.site.register(Food)
+admin.site.register(HonbabGroup)

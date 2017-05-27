@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from account.models import User
 
@@ -11,9 +12,26 @@ class Meal(models.Model):
     kcal = models.IntegerField(default=100)
     favor = models.IntegerField(default=0)
     check = models.BooleanField(default=False)
+
     def __str__(self):
 
         return self.date + '-' + self.time
+
+    def get_absolute_url(self):
+
+        return reverse('meal:detail', args=(self.pk,))
+
+    def get_full_url(self):
+
+        return 'http://127.0.0.1:8000' + self.get_absolute_url()
+
+    def get_facebook_url(self):
+
+        return 'https://www.facebook.com/sharer/sharer.php?u=' + self.get_full_url()
+
+    def get_twitter_url(self):
+
+        return 'https://twitter.com/intent/tweet?url=' + self.get_full_url() + '&text=hi'
 
 
 class MealCheck(models.Model):
@@ -45,7 +63,7 @@ class MealLike(models.Model):
 
 
 class HonbabGroup(models.Model):
-    user = models.ForeignKey(User, null=True)
+    user = models.ManyToManyField(User, null=True)
     meal = models.ForeignKey(Meal, null=True)
     title = models.CharField(max_length=100)
 
